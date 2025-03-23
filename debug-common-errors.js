@@ -26,9 +26,11 @@ Think about which debugging methods you found most useful and how you might appl
 
 console.log("Welcome to the bootcamp
 
-// What’s Wrong?
+// What’s Wrong? Type: Syntax Error
 
+//Cause: The string is not properly closed. The closing quotation mark for the string is missing.
 
+console.log("Welcome to the bootcamp");
 // Program B
 // Description:
 // This code attempts to multiply each number in an array by 2 and display the results. However, it crashes at runtime.
@@ -39,9 +41,20 @@ for (let i = 0; i < numbers.length; i++) {
   console.log(doubled);
 }
 
-// What’s Wrong?
+// What’s Wrong? 
+// Type: Runtime Error
 
+// Cause: The array numbers contains a string value "eight", which cannot be multiplied by a number. This will throw an error during runtime when trying to multiply the string by 2.
 
+// let numbers = [2, 4, "eight"];
+for (let i = 0; i < numbers.length; i++) {
+  if (typeof numbers[i] === "number") {
+    let doubled = numbers[i] * 2;
+    console.log(doubled);
+  } else {
+    console.log(`${numbers[i]} is not a number, skipping.`);
+  }
+}
 
 // Program C (Logic Error)
 // Description:
@@ -60,3 +73,19 @@ function isPrime(num) {
 console.log(isPrime(7)); // Expected true but gets false
 
 // What’s Wrong?
+
+// Type: Logic Error
+
+// Cause: The logic for returning the prime check is reversed. The program is returning true when a divisor is found (which should indicate the number is not prime). Instead, it should return false when a divisor is found (indicating the number is not prime).
+
+function isPrime(num) {
+  if (num < 2) return false;
+  for (let i = 2; i < num; i++) {
+    if (num % i === 0) {
+      return false;  // Corrected: num is NOT prime
+    }
+  }
+  return true; // Corrected: num IS prime
+}
+
+console.log(isPrime(7)); // Expected output: true
